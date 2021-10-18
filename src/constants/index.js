@@ -1,0 +1,49 @@
+export const SORT_LIST = 'SORT_LIST'
+export const SORT_CARD = 'SORT_CARD'
+
+export const ADD_BOARD = 'ADD_BOARD'
+export const SET_ACTIVE_BOARD = 'SET_ACTIVE_BOARD'
+// list constants
+export const ADD_LIST = 'ADD_LIST'
+export const EDIT_LIST_TITLE = 'EDIT_LIST_TITLE'
+export const DELETE_LIST = 'DELETE_LIST'
+export const MOVE_LIST = 'MOVE_LIST'
+export const SORT = 'SORT'
+export const MOVE_ALL_CARDS = 'MOVE_ALL_CARDS'
+// card constants
+export const ADD_CARD = 'ADD_CARD'
+export const DELETE_CARD = 'DELETE_CARD'
+
+export const EDIT_CARD_TITLE = 'EDIT_CARD_TITLE'
+
+export const EDIT_COVER = 'EDIT_COVER'
+export const DELETE_COVER = 'DELETE_COVER'
+export const EDIT_DESCRIPTION = 'EDIT_DESCRIPTION'
+export const EDIT_WATCH = 'EDIT_WATCH'
+
+export const ADD_DUEDDATE = 'ADD_DUEDDATE'
+export const DELETE_DUEDATE = 'DELETE_DUEDATE'
+export const DUEDATE_SELECTED = 'DUEDATE_SELECTED'
+
+export const ADD_CHECKLIST = 'ADD_CHECKLIST'
+export const EDIT_CHECKLIST_NAME = 'EDIT_CHECKLIST_NAME'
+export const DELETE_CHECKLIST = 'DELETE_CHECKLIST'
+export const ADD_LIST_ITEM = 'ADD_LIST_ITEM'
+export const EDIT_LIST_ITEM = 'EDIT_LIST_ITEM'
+export const DELETE_LIST_ITEM = 'DELETE_LIST_ITEM'
+export const EDIT_PERCENT = 'EDIT_PERCENT'
+
+export const REMOVE_LABEL = 'REMOVE_LABEL'
+export const ADD_LABEL = 'ADD_LABEL'
+export const CREATE_LABEL = 'CREATE_LABEL'
+export const CURRENT_LABEL = 'CURRENT_LABEL'
+export const EDIT_LABEL = 'EDIT_LABEL'
+export const DELETE_LABEL = 'DELETE_LABEL'
+
+export const ADD_ATTACHMENT = 'ADD_ATTACHMENT'
+export const EDIT_ATTACHMENT = 'EDIT_ATTACHMENT'
+export const DELETE_ATTACHMENT = 'DELETE_ATTACHMENT'
+
+export const ADD_ACTIVITY = 'ADD_ACTIVITY'
+export const EDIT_ACTIVITY = 'EDIT_ACTIVITY'
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY'
