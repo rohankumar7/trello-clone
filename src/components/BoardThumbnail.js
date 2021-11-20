@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Thumbnail = styled.div`
-  height: 280px;
-  width: 280px;
-  background: yellow;
+  height: 180px;
+  width: 180px;
+  background: #eee;
   padding: 10px;
   margin: 8px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   cursor: pointer;
   border-radius: 3px;
   box-shadow: 0 2px 4px grey;

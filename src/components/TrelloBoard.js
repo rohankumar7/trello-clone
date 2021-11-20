@@ -9,6 +9,7 @@ import Lists from './list/Lists'
 import AddList from './AddList'
 import IconButton from '@material-ui/core/IconButton'
 import ArrowBackIcon from "@material-ui/icons/ArrowBack"
+import { Height } from '@material-ui/icons'
 
 const ListsContainer = styled.div`
   display: flex;
@@ -67,8 +68,9 @@ function TrelloBoard() {
             <ArrowBackIcon />
           </IconButton>
         </Link>
-        <span style={{ fontSize: '18px', fontWeight: '500', color: '#71909a',marginLeft:'40px' }}>{board.title}</span>
+        <span style={{ fontSize: '18px', fontWeight: '500', color: '#333',marginLeft:'40px' }}>{board.title}</span>
       </Nav>
+      <div style={{height:'1px', background:'#eee'}}></div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='all-list' direction='horizontal' type='list'>
           {
