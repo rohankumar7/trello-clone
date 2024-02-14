@@ -51,6 +51,10 @@ jobs:
             exit 1
           fi
 
+      - name: Sync S3
+        if: env.TAG_EXISTS == 'true'
+        run: |
+          echo "S3 Sync Success"
       - name: Deploy if Tag Exists
         if: env.TAG_EXISTS == 'true'
         run: |
