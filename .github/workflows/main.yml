@@ -21,6 +21,10 @@ on:
           - GCC
           - WWW
 
+      tag:
+        description: 'Enter Tag'
+        required: true
+
 jobs:
   deploy:
     name: Deploy
