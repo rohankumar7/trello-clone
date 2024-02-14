@@ -55,7 +55,7 @@ jobs:
         if: env.TAG_EXISTS == 'true'
         run: |
           echo "S3 Sync Success"
-      - name: Deploy if Tag Exists
+      - name: CloudFront Invalidation
         if: env.TAG_EXISTS == 'true'
         run: |
           echo "Deploying with tag: ${{ github.event.inputs.tag }} on ${{github.event.inputs.environment}}"
