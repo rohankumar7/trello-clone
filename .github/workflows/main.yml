@@ -43,7 +43,7 @@ jobs:
           TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
           echo "tags=${TAG_LIST}"
           if echo "${TAGS}" | grep -q "\<${{ github.event.inputs.tag }}"; then
-            echo "Tag ${{github.event.inputs.tag}} exists."
+            echo "Tag ${{ github.event.inputs.tag }} exists."
             echo "TAG_EXISTS=true" >> $GITHUB_ENV
           else
             echo "Error: Tag does not exist."
@@ -61,7 +61,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.FEM_S3_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.FEM_S3_SECRET_KEY }}
           AWS_REGION: 'us-west-2'
-          DEST_DIR: 'environment/${{github.event.inputs.environment}}/dist'
+          DEST_DIR: 'environment/${{ github.event.inputs.environment }}/dist'
           SOURCE_DIR: 'release/${{ github.event.inputs.tag }}/dist'
           
       - name: CloudFront Invalidation
