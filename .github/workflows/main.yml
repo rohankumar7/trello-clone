@@ -41,6 +41,7 @@ jobs:
         run: |
           TAGS=$(git ls-remote --tags origin | awk -F"/" '{print $3}')
           TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
+          echo TAG_LIST
           echo "tags=${TAG_LIST}" >> $GITHUB_OUTPUT
 
           if echo "${TAGS}" | grep -q "\<${{ github.event.inputs.tag }}"; then
