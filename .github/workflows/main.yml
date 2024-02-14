@@ -41,14 +41,13 @@ jobs:
         run: |
           TAGS=$(git ls-remote --tags origin | awk -F"/" '{print $3}')
           TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
-          echo "tags=${TAG_LIST}" >> $GITHUB_OUTPUT
-
+          echo "tags=${TAG_LIST}"
           if echo "${TAGS}" | grep -q "\<${{ github.event.inputs.tag }}"; then
             echo "Tag exists."
-            echo "tag_exists=true" >> $GITHUB_OUTPUT
+            echo "TAG_EXISTS=true" >> $GITHUB_ENV
           else
             echo "Error: Tag does not exist."
-            echo "tag_exists=false" >> $GITHUB_OUTPUT
+            echo "TAG_EXISTS=false" >> $GITHUB_ENV
             exit 1
           fi
 
