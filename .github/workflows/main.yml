@@ -30,16 +30,24 @@ jobs:
     name: Deploy
     runs-on: self-hosted
     steps:
-      - name: Get Tags
+      - name: Get Tags and Check Tag Existence
         id: get_tags
         run: |
           TAGS=$(git ls-remote --tags origin | awk -F"/" '{print $3}')
           TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
           echo "::set-output name=tags::${TAG_LIST}"
-        
-      - name: Set Tags
-        id: set_tag_options
-        run: echo "::set-output name=tag_options::${{ steps.get_tags.outputs.tags }}"
 
-      - name: Run workflow
-        run: echo "Selected tag is ${{ github.event.inputs.tag }}"
+          if echo "${TAGS}" | grep -q "\<${{ github.event.inputs.tag }}"; then
+            echo "Tag exists."
+            echo "::set-output name=tag_exists::true"
+          else
+            echo "Error: Tag does not exist."
+            echo "::set-output name=tag_exists::false"
+            exit 1
+          fi
+
+      - name: Deploy if Tag Exists
+        if: steps.get_tags.outputs.tag_exists == 'true'
+        run: |
+          # Your deployment commands using the provided tag
+          echo "Deploying with tag: ${{ github.event.inputs.tag }}"
