@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select Environment'
+        type: choice
+        required: true
+        default: 'STAGING'
+        options:
+          - QA
+          - STAGING
+          - UAT
+          - SEA
+          - CA
+          - AU
+          - EU
+          - US
+          - SG
+          - GCC
+          - WWW
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    steps:
+      - name: Get Tags
+        id: get_tags
+        run: |
+          TAGS=$(git ls-remote --tags origin | awk -F"/" '{print $3}')
+          TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
+          echo "::set-output name=tags::${TAG_LIST}"
+        
+      - name: Set Tags
+        id: set_tag_options
+        run: echo "::set-output name=tag_options::${{ steps.get_tags.outputs.tags }}"
+
+      - name: Run workflow
+        run: echo "Selected tag is ${{ github.event.inputs.tag }}"
