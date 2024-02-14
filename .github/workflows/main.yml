@@ -33,27 +33,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            fetch-depth: '0'
-            
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: '0'
+
       - name: Get Tags and Check Tag Existence
         id: get_tags
         run: |
           TAGS=$(git ls-remote --tags origin | awk -F"/" '{print $3}')
           TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
-          echo "::set-output name=tags::${TAG_LIST}"
+          echo "tags=${TAG_LIST}" >> $GITHUB_ENV
 
           if echo "${TAGS}" | grep -q "\<${{ github.event.inputs.tag }}"; then
             echo "Tag exists."
-            echo "::set-output name=tag_exists::true"
+            echo "tag_exists=true" >> $GITHUB_ENV
           else
             echo "Error: Tag does not exist."
-            echo "::set-output name=tag_exists::false"
+            echo "tag_exists=false" >> $GITHUB_ENV
             exit 1
           fi
 
       - name: Deploy if Tag Exists
-        if: steps.get_tags.outputs.tag_exists == 'true'
+        if: env.TAG_EXISTS == 'true'
         run: |
           # Your deployment commands using the provided tag
           echo "Deploying with tag: ${{ github.event.inputs.tag }}"
