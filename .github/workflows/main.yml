@@ -30,12 +30,6 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Debugging Information
-        run: |
-          pwd
-          ls -la
-          git remote -v
-
       - name: Get Tags
         id: get_tags
         run: |
