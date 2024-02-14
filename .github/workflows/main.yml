@@ -43,7 +43,7 @@ jobs:
           TAG_LIST=$(echo "${TAGS}" | tr '\n' ',')
           echo "tags=${TAG_LIST}"
           if echo "${TAGS}" | grep -q "\<${{ github.event.inputs.tag }}"; then
-            echo "Tag exists."
+            echo "Tag ${{github.event.inputs.tag}} exists."
             echo "TAG_EXISTS=true" >> $GITHUB_ENV
           else
             echo "Error: Tag does not exist."
@@ -54,4 +54,4 @@ jobs:
       - name: Deploy if Tag Exists
         if: env.TAG_EXISTS == 'true'
         run: |
-          echo "Deploying with tag: ${{ github.event.inputs.tag }}"
+          echo "Deploying with tag: ${{ github.event.inputs.tag }} on ${{github.event.inputs.environment}}"
