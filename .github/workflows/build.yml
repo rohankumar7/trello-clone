@@ -19,8 +19,12 @@ jobs:
         id: extract_tag
         run: echo "::set-output name=tag_name::${GITHUB_REF#refs/tags/}"
 
+      # Save tag name to a file
+      - name: Save tag name to file
+        run: echo "${{ steps.extract_tag.outputs.tag_name }}" > tag-name.txt
+
       - name: Upload tag name as artifact
         uses: actions/upload-artifact@v2
         with:
           name: tag-name
-          path: ${{ steps.extract_tag.outputs.tag_name }}
+          path: tag-name.txt
