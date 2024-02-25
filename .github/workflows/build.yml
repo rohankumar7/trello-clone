@@ -14,17 +14,13 @@ jobs:
 
       # Your build steps here...
 
-      # Extract tag name and create artifact
-      - name: Extract tag name
-        id: extract_tag
-        run: echo "::set-output name=tag_name::${GITHUB_REF#refs/tags/}"
+      # Modify commit message to include tag information
+      - name: Add tag info to commit message
+        run: echo "Deploying tag: ${{ github.ref }}" >> $GITHUB_EVENT_PATH
 
-      # Save tag name to a file
-      - name: Save tag name to file
-        run: echo "${{ steps.extract_tag.outputs.tag_name }}" > tag-name.txt
-
-      - name: Upload tag name as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: tag-name
-          path: tag-name.txt
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Add tag info to commit message" || true
+          git push
