@@ -1,5 +1,3 @@
-name: Deploy
-
 on:
   workflow_dispatch:
     inputs:
@@ -28,7 +26,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Extract tag name from commit message
+      - name: Print GITHUB_REF
         run: |
-          TAG_NAME=$(git log --format=%B -n 1 $GITHUB_SHA | grep -o 'Deploying tag: [^ ]*' | cut -d ' ' -f 3)
-          echo "Deploying tag $TAG_NAME"
+          echo "GITHUB_REF name: $GITHUB_REF"
