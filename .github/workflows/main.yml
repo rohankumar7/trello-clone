@@ -25,24 +25,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Download tag name artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: tag-name
-          path: tag
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Read tag name from artifact
-        id: read_tag
+      - name: Extract tag name from commit message
         run: |
-          TAG_NAME=$(cat tag/tag-name)
-          echo "::set-output name=tag_name::$TAG_NAME"
-
-      - name: Deploy code
-        run: |
-          # Use ${{ github.event.inputs.tag_name }} wherever you need the tag name
-          # If tag_name input is provided, use that, otherwise use the one from the artifact
-          if [ -n "${{ github.event.inputs.tag_name }}" ]; then
-            echo "Deploying tag ${{ github.event.inputs.tag_name }}"
-          else
-            echo "Deploying tag ${{ steps.read_tag.outputs.tag_name }}"
-          fi
+          TAG_NAME=$(git log --format=%B -n 1 $GITHUB_SHA | grep -o 'Deploying tag: [^ ]*' | cut -d ' ' -f 3)
+          echo "Deploying tag $TAG_NAME"
