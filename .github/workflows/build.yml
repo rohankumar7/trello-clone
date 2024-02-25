@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Your build steps here...
+
+      # Extract tag name and create artifact
+      - name: Extract tag name
+        id: extract_tag
+        run: echo "::set-output name=tag_name::${GITHUB_REF#refs/tags/}"
+
+      - name: Upload tag name as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: tag-name
+          path: ${{ steps.extract_tag.outputs.tag_name }}
