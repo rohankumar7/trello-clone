@@ -16,11 +16,9 @@ jobs:
 
       # Modify commit message to include tag information
       - name: Add tag info to commit message
-        run: echo "Deploying tag: ${{ github.ref }}" >> $GITHUB_EVENT_PATH
-
-      - name: Commit files
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -am "Add tag info to commit message" || true
+          echo "Deploying tag: ${{ github.ref }}" >> commit_message.txt
+          cat commit_message.txt # For verification, you can remove this line later
+          git add commit_message.txt
+          git commit -m "Add tag info to commit message"
           git push
