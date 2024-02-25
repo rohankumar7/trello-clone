@@ -26,6 +26,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Print GITHUB_REF
+      - name: Extract tag name
+        run: echo "TAG_NAME=$(echo $GITHUB_REF | cut -d '/' -f 3)" >> $GITHUB_ENV
+        
+      - name: Print GITHUB_REF and tag name
         run: |
           echo "GITHUB_REF name: $GITHUB_REF"
+          echo "Tag name: $TAG_NAME"
